@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Anonymous Rebuttal Results</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero">
+        <div class="hero-copy">
+          <h1>Additional Experimental Results</h1>
+          <p class="lead">
+            This page provides extra quantitative evidence requested during rebuttal.
+          </p>
+        </div>
+      </header>
+
+      <main>
+        <section class="section-card">
+          <div class="section-heading">
+            <div>
+              <p class="section-kicker">Result A</p>
+              <h2>Downstream task success</h2>
+            </div>
+            <p class="section-note">
+              We report results on both the LIBERO benchmark and four Robotwin tasks.
+            </p>
+          </div>
+
+          <div class="subsection-head">
+            <h3>LIBERO</h3>
+            <p class="subsection-note">
+              Category-level success rates on spatial, object, goal, and long-horizon tasks.
+            </p>
+          </div>
+
+          <div class="summary-grid" id="task-summary"></div>
+
+          <div class="table-frame">
+            <table>
+              <thead>
+                <tr>
+                  <th>Method</th>
+                  <th>Spatial</th>
+                  <th>Object</th>
+                  <th>Goal</th>
+                  <th>Long</th>
+                  <th>Overall</th>
+                </tr>
+              </thead>
+              <tbody id="downstream-table"></tbody>
+            </table>
+          </div>
+
+          <div class="subsection-head second-block">
+            <h3>Robotwin</h3>
+            <p class="subsection-note">
+              Success rates on four representative manipulation tasks from Robotwin.
+            </p>
+          </div>
+
+          <div class="table-frame">
+            <table>
+              <thead>
+                <tr>
+                  <th>Method</th>
+                  <th>lift_pot</th>
+                  <th>place_container_plate</th>
+                  <th>shake_bottle</th>
+                  <th>turn_switch</th>
+                  <th>Avg</th>
+                </tr>
+              </thead>
+              <tbody id="robotwin-table"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="section-card">
+          <div class="section-heading">
+            <div>
+              <p class="section-kicker">Result B</p>
+              <h2>Reconstruction and dynamics metrics</h2>
+            </div>
+            <p class="section-note">
+              Standard perceptual metrics are complemented by a dynamics-aware
+              error to verify that the model captures action-driven changes.
+            </p>
+          </div>
+
+          <div class="metric-grid" id="metric-grid"></div>
+
+          <div class="table-frame">
+            <table>
+              <thead>
+                <tr>
+                  <th>Task</th>
+                  <th>MSE ↓</th>
+                  <th>PSNR ↑</th>
+                  <th>SSIM ↑</th>
+                  <th>LPIPS ↓</th>
+                  <th>Delta MSE ↓</th>
+                  <th>Action-Visual Corr ↑</th>
+                </tr>
+              </thead>
+              <tbody id="reconstruction-table"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="section-card formula-card">
+          <div class="section-heading">
+            <div>
+              <p class="section-kicker">Metric definitions</p>
+              <h2>Why we report Delta MSE and AVC</h2>
+            </div>
+            <p class="section-note">
+              These metrics target dynamic consistency rather than only static image quality.
+            </p>
+          </div>
+
+          <div class="formula-grid">
+            <article class="formula-block">
+              <h3>Delta MSE</h3>
+              <p>
+                Measures whether the predicted frame-to-frame change matches the
+                ground-truth visual transition.
+              </p>
+              <div class="equation-stack">
+                <math display="block">
+                  <mrow>
+                    <msub>
+                      <mrow>
+                        <mo>&#916;</mo>
+                        <mover>
+                          <mi>o</mi>
+                          <mo>^</mo>
+                        </mover>
+                      </mrow>
+                      <mi>t</mi>
+                    </msub>
+                    <mo>=</mo>
+                    <msub>
+                      <mover>
+                        <mi>o</mi>
+                        <mo>^</mo>
+                      </mover>
+                      <mrow>
+                        <mi>t</mi>
+                        <mo>+</mo>
+                        <mn>1</mn>
+                      </mrow>
+                    </msub>
+                    <mo>-</mo>
+                    <msub>
+                      <mover>
+                        <mi>o</mi>
+                        <mo>^</mo>
+                      </mover>
+                      <mi>t</mi>
+                    </msub>
+                  </mrow>
+                </math>
+                <math display="block">
+                  <mrow>
+                    <msub>
+                      <mrow>
+                        <mo>&#916;</mo>
+                        <mi>o</mi>
+                      </mrow>
+                      <mi>t</mi>
+                    </msub>
+                    <mo>=</mo>
+                    <msub>
+                      <mi>o</mi>
+                      <mrow>
+                        <mi>t</mi>
+                        <mo>+</mo>
+                        <mn>1</mn>
+                      </mrow>
+                    </msub>
+                    <mo>-</mo>
+                    <msub>
+                      <mi>o</mi>
+                      <mi>t</mi>
+                    </msub>
+                  </mrow>
+                </math>
+                <math display="block">
+                  <mrow>
+                    <mtext>Delta MSE</mtext>
+                    <mo>=</mo>
+                    <mfrac>
+                      <mn>1</mn>
+                      <mi>T</mi>
+                    </mfrac>
+                    <munder><mo>&#8721;</mo><mi>t</mi></munder>
+                    <msup>
+                      <mrow>
+                        <mo>&#8741;</mo>
+                        <msub>
+                          <mrow>
+                            <mo>&#916;</mo>
+                            <mi>o</mi>
+                          </mrow>
+                          <mi>t</mi>
+                        </msub>
+                        <mo>-</mo>
+                        <msub>
+                          <mrow>
+                            <mo>&#916;</mo>
+                            <mover>
+                              <mi>o</mi>
+                              <mo>^</mo>
+                            </mover>
+                          </mrow>
+                          <mi>t</mi>
+                        </msub>
+                        <mo>&#8741;</mo>
+                      </mrow>
+                      <mn>2</mn>
+                    </msup>
+                  </mrow>
+                </math>
+              </div>
+              <p>
+                Lower values indicate that the model more accurately captures the
+                magnitude and direction of action-induced motion.
+              </p>
+              <p class="symbol-note">
+                Symbols: <span class="math-inline">o<sub>t</sub></span> is the ground-truth
+                observation at step <span class="math-inline">t</span>,
+                <span class="math-inline">o&#770;<sub>t</sub></span> is the predicted observation,
+                <span class="math-inline">&#916;o<sub>t</sub> = o<sub>t+1</sub> - o<sub>t</sub></span>
+                is the frame difference, and <span class="math-inline">T</span> is the rollout
+                horizon.
+              </p>
+            </article>
+
+            <article class="formula-block">
+              <h3>Action-Visual Correlation (AVC)</h3>
+              <p>
+                Measures the correlation between action magnitude and the
+                magnitude of predicted visual change.
+              </p>
+              <div class="equation-stack">
+                <math display="block">
+                  <mrow>
+                    <mtext>AVC</mtext>
+                    <mo>=</mo>
+                    <mfrac>
+                      <mrow>
+                        <munder>
+                          <mo>&#8721;</mo>
+                          <mi>t</mi>
+                        </munder>
+                        <mrow>
+                          <mo>(</mo>
+                          <mo>&#8741;</mo>
+                          <msub>
+                            <mi>a</mi>
+                            <mi>t</mi>
+                          </msub>
+                          <mo>&#8741;</mo>
+                          <mo>-</mo>
+                          <mover>
+                            <mi>a</mi>
+                            <mo>&#175;</mo>
+                          </mover>
+                          <mo>)</mo>
+                        </mrow>
+                        <mrow>
+                          <mo>(</mo>
+                          <mo>&#8741;</mo>
+                          <msub>
+                            <mrow>
+                              <mo>&#916;</mo>
+                              <mover>
+                                <mi>o</mi>
+                                <mo>^</mo>
+                              </mover>
+                            </mrow>
+                            <mi>t</mi>
+                          </msub>
+                          <mo>&#8741;</mo>
+                          <mo>-</mo>
+                          <mover>
+                            <mi>v</mi>
+                            <mo>&#175;</mo>
+                          </mover>
+                          <mo>)</mo>
+                        </mrow>
+                      </mrow>
+                      <mrow>
+                        <msqrt>
+                          <mrow>
+                            <munder><mo>&#8721;</mo><mi>t</mi></munder>
+                            <msup>
+                              <mrow>
+                                <mo>(</mo>
+                                <mo>&#8741;</mo>
+                                <msub>
+                                  <mi>a</mi>
+                                  <mi>t</mi>
+                                </msub>
+                                <mo>&#8741;</mo>
+                                <mo>-</mo>
+                                <mover>
+                                  <mi>a</mi>
+                                  <mo>&#175;</mo>
+                                </mover>
+                                <mo>)</mo>
+                              </mrow>
+                              <mn>2</mn>
+                            </msup>
+                            <mo>&#183;</mo>
+                            <munder><mo>&#8721;</mo><mi>t</mi></munder>
+                            <msup>
+                              <mrow>
+                                <mo>(</mo>
+                                <mo>&#8741;</mo>
+                                <msub>
+                                  <mrow>
+                                    <mo>&#916;</mo>
+                                    <mover>
+                                      <mi>o</mi>
+                                      <mo>^</mo>
+                                    </mover>
+                                  </mrow>
+                                  <mi>t</mi>
+                                </msub>
+                                <mo>&#8741;</mo>
+                                <mo>-</mo>
+                                <mover>
+                                  <mi>v</mi>
+                                  <mo>&#175;</mo>
+                                </mover>
+                                <mo>)</mo>
+                              </mrow>
+                              <mn>2</mn>
+                            </msup>
+                          </mrow>
+                        </msqrt>
+                      </mrow>
+                    </mfrac>
+                  </mrow>
+                </math>
+              </div>
+              <p>
+                Higher AVC means stronger alignment between the commanded action
+                and the predicted visual response, reducing the chance of
+                producing action-agnostic smooth videos.
+              </p>
+              <p class="symbol-note">
+                Symbols: <span class="math-inline">a<sub>t</sub></span> is the action at step
+                <span class="math-inline">t</span>, <span class="math-inline">||a<sub>t</sub>||</span>
+                is its magnitude, <span class="math-inline">||&#916;o&#770;<sub>t</sub>||</span> is
+                the magnitude of predicted visual change, and
+                <span class="math-inline">a&#772;</span> and <span class="math-inline">v&#772;</span>
+                denote the temporal means of these two quantities.
+              </p>
+            </article>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <template id="summary-template">
+      <article class="summary-card">
+        <div class="summary-header">
+          <p class="summary-label"></p>
+          <p class="summary-delta"></p>
+        </div>
+        <div class="bar-pair">
+          <div>
+            <span>Base</span>
+            <div class="bar-track"><div class="bar-fill base-fill"></div></div>
+            <strong class="base-value"></strong>
+          </div>
+          <div>
+            <span>RFT</span>
+            <div class="bar-track"><div class="bar-fill rft-fill"></div></div>
+            <strong class="rft-value"></strong>
+          </div>
+        </div>
+      </article>
+    </template>
+
+    <template id="metric-template">
+      <article class="metric-card">
+        <p class="metric-task"></p>
+        <dl>
+          <div>
+            <dt>MSE</dt>
+            <dd class="metric-mse"></dd>
+          </div>
+          <div>
+            <dt>PSNR</dt>
+            <dd class="metric-psnr"></dd>
+          </div>
+          <div>
+            <dt>SSIM</dt>
+            <dd class="metric-ssim"></dd>
+          </div>
+          <div>
+            <dt>LPIPS</dt>
+            <dd class="metric-lpips"></dd>
+          </div>
+          <div>
+            <dt>Delta MSE</dt>
+            <dd class="metric-delta"></dd>
+          </div>
+          <div>
+            <dt>AVC</dt>
+            <dd class="metric-avc"></dd>
+          </div>
+        </dl>
+      </article>
+    </template>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
