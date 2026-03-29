@@ -71,7 +71,7 @@ const wmScalingResults = [
     lpips: "0.067",
     delta: "0.0020",
     avc: "0.632",
-    sr: "94.4",
+    sr: "94.8",
     featured: false,
   },
 ];
