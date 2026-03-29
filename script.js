@@ -12,7 +12,7 @@ const downstreamTable = [
     object: "88.0 ± 0.5",
     goal: "92.8 ± 1.2",
     long: "77.2 ± 0.4",
-    overall: "86.6 ± 0.8",
+    overall: "86.6",
   },
   {
     method: "RFT",
@@ -20,7 +20,7 @@ const downstreamTable = [
     object: "94.4 ± 1.0",
     goal: "95.2 ± 0.7",
     long: "80.2 ± 0.4",
-    overall: "91.2 ± 0.9",
+    overall: "91.2",
   },
 ];
 
@@ -120,23 +120,6 @@ function renderDownstreamTable() {
   });
 }
 
-function renderMetricCards() {
-  const host = document.querySelector("#metric-grid");
-  const template = document.querySelector("#metric-template");
-
-  reconstructionResults.forEach((result) => {
-    const node = template.content.cloneNode(true);
-    node.querySelector(".metric-task").textContent = result.task;
-    node.querySelector(".metric-mse").textContent = result.mse.toFixed(4);
-    node.querySelector(".metric-psnr").textContent = result.psnr.toFixed(2);
-    node.querySelector(".metric-ssim").textContent = result.ssim.toFixed(3);
-    node.querySelector(".metric-lpips").textContent = result.lpips.toFixed(3);
-    node.querySelector(".metric-delta").textContent = result.delta.toFixed(4);
-    node.querySelector(".metric-avc").textContent = formatMetric(result.avc, 3);
-    host.appendChild(node);
-  });
-}
-
 function renderRobotWinTable() {
   const tbody = document.querySelector("#robotwin-table");
 
@@ -198,6 +181,5 @@ function renderWmScalingTable() {
 renderTaskSummary();
 renderDownstreamTable();
 renderRobotWinTable();
-renderMetricCards();
 renderReconstructionTable();
 renderWmScalingTable();
