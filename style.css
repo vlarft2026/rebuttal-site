@@ -296,6 +296,10 @@ table {
   min-width: 760px;
 }
 
+.wide-table {
+  min-width: 1120px;
+}
+
 th,
 td {
   padding: 15px 16px;
@@ -317,6 +321,20 @@ tbody tr:last-child td {
 
 tbody tr:nth-child(even) td {
   background: rgba(164, 63, 25, 0.03);
+}
+
+.feature-row td {
+  background: linear-gradient(180deg, rgba(164, 63, 25, 0.08), rgba(164, 63, 25, 0.04));
+}
+
+.feature-row td:first-child {
+  font-weight: 700;
+  color: var(--accent-strong);
+}
+
+.best-cell {
+  font-weight: 700;
+  color: var(--accent-strong);
 }
 
 .metric-card dl {

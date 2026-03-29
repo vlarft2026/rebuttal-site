@@ -51,6 +51,31 @@ const reconstructionResults = [
   { task: "Avg", mse: 0.0039, psnr: 25.23, ssim: 0.906, lpips: 0.059, delta: 0.0020, avc: 0.658 },
 ];
 
+const wmScalingResults = [
+  {
+    wm: "421M",
+    mse: "0.0036",
+    psnr: "25.18",
+    ssim: "0.901",
+    lpips: "0.063",
+    delta: "0.0019",
+    avc: "0.640",
+    sr: "95.2",
+    featured: true,
+  },
+  {
+    wm: "138M",
+    mse: "0.0039",
+    psnr: "24.98",
+    ssim: "0.896",
+    lpips: "0.067",
+    delta: "0.0020",
+    avc: "0.632",
+    sr: "94.4",
+    featured: false,
+  },
+];
+
 function formatMetric(value, digits = 4) {
   if (value === null || value === undefined) {
     return "TBD";
@@ -147,8 +172,32 @@ function renderReconstructionTable() {
   });
 }
 
+function renderWmScalingTable() {
+  const tbody = document.querySelector("#wm-scaling-table");
+
+  wmScalingResults.forEach((row) => {
+    const tr = document.createElement("tr");
+    if (row.featured) {
+      tr.classList.add("feature-row");
+    }
+
+    tr.innerHTML = `
+      <td>${row.wm}</td>
+      <td>${row.mse}</td>
+      <td>${row.psnr}</td>
+      <td>${row.ssim}</td>
+      <td>${row.lpips}</td>
+      <td class="${row.featured ? "best-cell" : ""}">${row.delta}</td>
+      <td class="${row.featured ? "best-cell" : ""}">${row.avc}</td>
+      <td class="${row.featured ? "best-cell" : ""}">${row.sr}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
 renderTaskSummary();
 renderDownstreamTable();
 renderRobotWinTable();
 renderMetricCards();
 renderReconstructionTable();
+renderWmScalingTable();

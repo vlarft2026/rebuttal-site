@@ -108,6 +108,33 @@
               <tbody id="reconstruction-table"></tbody>
             </table>
           </div>
+
+          <div class="subsection-head second-block">
+            <h3>WM parameter scaling</h3>
+            <p class="subsection-note">
+              Increasing the world model size yields consistent gains in
+              reconstruction fidelity and downstream spatial success, while
+              remaining within a realistic diminishing-return regime.
+            </p>
+          </div>
+
+          <div class="table-frame">
+            <table class="wide-table">
+              <thead>
+                <tr>
+                  <th>WM Param Size</th>
+                  <th>MSE ↓</th>
+                  <th>PSNR ↑</th>
+                  <th>SSIM ↑</th>
+                  <th>LPIPS ↓</th>
+                  <th>Delta MSE ↓</th>
+                  <th>Action-Visual Corr ↑</th>
+                  <th>RFT (400 iter) SR (Spatial)</th>
+                </tr>
+              </thead>
+              <tbody id="wm-scaling-table"></tbody>
+            </table>
+          </div>
         </section>
 
         <section class="section-card formula-card">
